@@ -25,7 +25,7 @@
 package jenkins.plugins.jobcacher;
 
 import hudson.*;
-import hudson.model.AbstractDescribableImpl;
+import hudson.model.Describable;
 import hudson.model.Job;
 import hudson.model.Run;
 import hudson.model.TaskListener;
@@ -34,9 +34,10 @@ import hudson.util.DirScanner;
 import hudson.util.FileVisitor;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
-import jenkins.MasterToSlaveFileCallable;
+import jenkins.agents.ControllerToAgentFileCallable;
 import jenkins.plugins.itemstorage.ObjectPath;
 import org.kohsuke.stapler.Stapler;
 
@@ -48,8 +49,9 @@ import org.kohsuke.stapler.Stapler;
  *
  * @author Peter Hayes
  */
-public abstract class Cache extends AbstractDescribableImpl<Cache> implements ExtensionPoint, Serializable {
+public abstract class Cache implements Describable<Cache>, ExtensionPoint, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -82,6 +84,7 @@ public abstract class Cache extends AbstractDescribableImpl<Cache> implements Ex
      */
     public abstract static class Saver implements Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -152,8 +155,9 @@ public abstract class Cache extends AbstractDescribableImpl<Cache> implements Ex
     /**
      * Utility class to calculate the size of a potentially remote directory given a pattern and excludes.
      */
-    public static class DirectorySize extends MasterToSlaveFileCallable<Long> {
+    public static class DirectorySize implements ControllerToAgentFileCallable<Long> {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         private final String glob;

@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
-import jenkins.MasterToSlaveFileCallable;
+import jenkins.agents.ControllerToAgentFileCallable;
 
 public class ZipArbitraryFileCacheStrategy extends AbstractCompressingArbitraryFileCacheStrategy {
 
@@ -29,19 +29,8 @@ public class ZipArbitraryFileCacheStrategy extends AbstractCompressingArbitraryF
         target.act(new CreateZipCallable(source, includes, excludes, useDefaultExcludes));
     }
 
-    private static class CreateZipCallable extends MasterToSlaveFileCallable<Void> {
-
-        private final FilePath source;
-        private final String includes;
-        private final String excludes;
-        private final boolean useDefaultExcludes;
-
-        public CreateZipCallable(FilePath source, String includes, String excludes, boolean useDefaultExcludes) {
-            this.source = source;
-            this.includes = includes;
-            this.excludes = excludes;
-            this.useDefaultExcludes = useDefaultExcludes;
-        }
+    private record CreateZipCallable(FilePath source, String includes, String excludes, boolean useDefaultExcludes)
+            implements ControllerToAgentFileCallable<Void> {
 
         @Override
         public Void invoke(File targetFile, VirtualChannel channel) throws IOException, InterruptedException {

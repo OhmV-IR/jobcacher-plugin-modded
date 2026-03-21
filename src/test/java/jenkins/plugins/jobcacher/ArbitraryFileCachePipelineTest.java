@@ -17,7 +17,6 @@ import jenkins.branch.Branch;
 import jenkins.branch.BranchSource;
 import jenkins.scm.impl.mock.MockSCMHead;
 import jenkins.scm.impl.mock.MockSCMSource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition;
@@ -552,8 +551,7 @@ class ArbitraryFileCachePipelineTest {
         WorkflowRun run1 = jenkins.assertBuildStatus(Result.SUCCESS, project.scheduleBuild2(0));
         assertThat(
                 run1.getLog(),
-                containsString(
-                        "[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
+                containsString("[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
 
         // Delete the entire workspace to simulate a fresh executor
         FilePath workspace = agent.getWorkspaceFor(project);
@@ -601,8 +599,7 @@ class ArbitraryFileCachePipelineTest {
         WorkflowRun run = jenkins.assertBuildStatus(Result.SUCCESS, project.scheduleBuild2(0));
         assertThat(
                 run.getLog(),
-                containsString(
-                        "[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
+                containsString("[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
     }
 
     @Test
@@ -647,8 +644,7 @@ class ArbitraryFileCachePipelineTest {
         WorkflowRun run1 = jenkins.assertBuildStatus(Result.SUCCESS, project.scheduleBuild2(0));
         assertThat(
                 run1.getLog(),
-                containsString(
-                        "[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
+                containsString("[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
 
         // Delete the entire workspace to simulate a fresh executor
         FilePath workspace = agent.getWorkspaceFor(project);
@@ -710,8 +706,7 @@ class ArbitraryFileCachePipelineTest {
         WorkflowRun run1 = jenkins.assertBuildStatus(Result.SUCCESS, project.scheduleBuild2(0));
         assertThat(
                 run1.getLog(),
-                containsString(
-                        "[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
+                containsString("[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
 
         // Delete the entire workspace to simulate a fresh executor
         FilePath workspace = agent.getWorkspaceFor(project);
@@ -772,8 +767,7 @@ class ArbitraryFileCachePipelineTest {
         WorkflowRun run1 = jenkins.assertBuildStatus(Result.SUCCESS, project.scheduleBuild2(0));
         assertThat(
                 run1.getLog(),
-                containsString(
-                        "[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
+                containsString("[Cache for test-path with id 95147d7f3368d66bd7f952b5245a0968] Creating cache..."));
 
         // Delete the entire workspace to simulate a fresh executor
         FilePath workspace = agent.getWorkspaceFor(project);

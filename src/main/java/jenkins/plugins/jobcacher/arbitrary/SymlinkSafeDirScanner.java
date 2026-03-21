@@ -5,6 +5,7 @@ import hudson.util.DirScanner;
 import hudson.util.FileVisitor;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ import org.apache.tools.ant.types.selectors.SelectorUtils;
  */
 class SymlinkSafeDirScanner extends DirScanner {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final String includes;
@@ -96,7 +98,8 @@ class SymlinkSafeDirScanner extends DirScanner {
 
         for (File child : children) {
             if (Files.isSymbolicLink(child.toPath())) {
-                String relativePath = baseDir.toPath().relativize(child.toPath()).toString();
+                String relativePath =
+                        baseDir.toPath().relativize(child.toPath()).toString();
                 if (matchesPatterns(relativePath, includePatterns, excludePatterns, defaultExcludePatterns)) {
                     scanSingle(child, relativePath, visitor);
                 }

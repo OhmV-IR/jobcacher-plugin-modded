@@ -5,7 +5,7 @@ import hudson.remoting.VirtualChannel;
 import hudson.util.io.ArchiverFactory;
 import java.io.*;
 import java.nio.file.Files;
-import jenkins.MasterToSlaveFileCallable;
+import jenkins.agents.ControllerToAgentFileCallable;
 import org.apache.commons.compress.compressors.CompressorException;
 
 public class TarArbitraryFileCacheStrategy extends AbstractCompressingArbitraryFileCacheStrategy {
@@ -42,15 +42,8 @@ public class TarArbitraryFileCacheStrategy extends AbstractCompressingArbitraryF
                 new CreateTarCallable(source, includes, excludes, useDefaultExcludes, compressingOutputStreamFactory));
     }
 
-    private static class ExtractTarCallable extends MasterToSlaveFileCallable<Void> {
-
-        private final FilePath target;
-        private final CompressingInputStreamFactory compressingInputStreamFactory;
-
-        public ExtractTarCallable(FilePath target, CompressingInputStreamFactory compressingInputStreamFactory) {
-            this.target = target;
-            this.compressingInputStreamFactory = compressingInputStreamFactory;
-        }
+    private record ExtractTarCallable(FilePath target, CompressingInputStreamFactory compressingInputStreamFactory)
+            implements ControllerToAgentFileCallable<Void> {
 
         @Override
         public Void invoke(File sourceFile, VirtualChannel channel) throws IOException, InterruptedException {
@@ -72,26 +65,13 @@ public class TarArbitraryFileCacheStrategy extends AbstractCompressingArbitraryF
         }
     }
 
-    private static class CreateTarCallable extends MasterToSlaveFileCallable<Void> {
-
-        private final FilePath source;
-        private final String includes;
-        private final String excludes;
-        private final boolean useDefaultExcludes;
-        private final CompressingOutputStreamFactory compressingOutputStreamFactory;
-
-        public CreateTarCallable(
-                FilePath source,
-                String includes,
-                String excludes,
-                boolean useDefaultExcludes,
-                CompressingOutputStreamFactory compressingOutputStreamFactory) {
-            this.source = source;
-            this.includes = includes;
-            this.excludes = excludes;
-            this.useDefaultExcludes = useDefaultExcludes;
-            this.compressingOutputStreamFactory = compressingOutputStreamFactory;
-        }
+    private record CreateTarCallable(
+            FilePath source,
+            String includes,
+            String excludes,
+            boolean useDefaultExcludes,
+            CompressingOutputStreamFactory compressingOutputStreamFactory)
+            implements ControllerToAgentFileCallable<Void> {
 
         @Override
         public Void invoke(File targetFile, VirtualChannel channel) throws IOException, InterruptedException {

@@ -28,7 +28,8 @@ class CacheBuildLastActionTest {
         action.addCaches(Collections.singletonList(cache2));
 
         // Verify both caches are present
-        CacheProjectAction projectAction = (CacheProjectAction) action.getProjectActions().iterator().next();
+        CacheProjectAction projectAction =
+                (CacheProjectAction) action.getProjectActions().iterator().next();
         assertThat(projectAction.getCaches(), hasSize(2));
         assertThat(projectAction.getCaches(), containsInAnyOrder(cache1, cache2));
     }
@@ -44,7 +45,8 @@ class CacheBuildLastActionTest {
         // Should not throw
         action.addCaches(Collections.singletonList(cache));
 
-        CacheProjectAction projectAction = (CacheProjectAction) action.getProjectActions().iterator().next();
+        CacheProjectAction projectAction =
+                (CacheProjectAction) action.getProjectActions().iterator().next();
         assertThat(projectAction.getCaches(), hasSize(1));
         assertThat(projectAction.getCaches(), contains(cache));
     }
@@ -62,7 +64,8 @@ class CacheBuildLastActionTest {
         action.addCaches(List.of(cache2));
         action.addCaches(List.of(cache3));
 
-        CacheProjectAction projectAction = (CacheProjectAction) action.getProjectActions().iterator().next();
+        CacheProjectAction projectAction =
+                (CacheProjectAction) action.getProjectActions().iterator().next();
         assertThat(projectAction.getCaches(), hasSize(3));
         assertThat(projectAction.getCaches(), containsInAnyOrder(cache1, cache2, cache3));
     }

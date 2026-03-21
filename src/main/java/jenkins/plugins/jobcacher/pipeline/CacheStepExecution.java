@@ -6,6 +6,7 @@ import hudson.Launcher;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import java.io.IOException;
+import java.io.Serial;
 import java.util.List;
 import jenkins.plugins.itemstorage.GlobalItemStorage;
 import jenkins.plugins.jobcacher.Cache;
@@ -16,6 +17,7 @@ import org.jenkinsci.plugins.workflow.steps.StepContext;
 
 public class CacheStepExecution extends GeneralNonBlockingStepExecution {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final Long maxCacheSize;
@@ -74,6 +76,7 @@ public class CacheStepExecution extends GeneralNonBlockingStepExecution {
 
     private class NonBlockingExecutionCallback extends BodyExecutionCallback {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         private final Long maxCacheSize;
@@ -136,6 +139,7 @@ public class CacheStepExecution extends GeneralNonBlockingStepExecution {
      */
     private static class ExecutionCallback extends BodyExecutionCallback {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         private final Long maxCacheSize;

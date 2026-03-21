@@ -36,6 +36,7 @@ import hudson.util.ListBoxModel;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serial;
 import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
@@ -70,6 +71,7 @@ import org.kohsuke.stapler.*;
  */
 public class ArbitraryFileCache extends Cache {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final String CACHE_VALIDITY_DECIDING_FILE_HASH_FILE_EXTENSION = ".hash";
@@ -389,6 +391,7 @@ public class ArbitraryFileCache extends Cache {
 
     private class SaverImpl extends Saver {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         private final String expandedPath;

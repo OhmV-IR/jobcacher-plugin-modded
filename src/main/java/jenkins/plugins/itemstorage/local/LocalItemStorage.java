@@ -31,6 +31,7 @@ import hudson.model.Item;
 import hudson.model.listeners.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 import java.util.logging.Logger;
 import jenkins.plugins.itemstorage.GlobalItemStorage;
 import jenkins.plugins.itemstorage.ItemStorage;
@@ -47,6 +48,7 @@ import org.kohsuke.stapler.DataBoundSetter;
  */
 public class LocalItemStorage extends ItemStorage<LocalObjectPath> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOG = Logger.getLogger(LocalItemStorage.class.getName());

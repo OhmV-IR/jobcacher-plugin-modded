@@ -27,6 +27,7 @@ package jenkins.plugins.itemstorage;
 import hudson.ExtensionPoint;
 import hudson.model.AbstractDescribableImpl;
 import hudson.model.Item;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -38,6 +39,7 @@ import java.io.Serializable;
 public abstract class ItemStorage<T extends ObjectPath> extends AbstractDescribableImpl<ItemStorage<T>>
         implements ExtensionPoint, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
