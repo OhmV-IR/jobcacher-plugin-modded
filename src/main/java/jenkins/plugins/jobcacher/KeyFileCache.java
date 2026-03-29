@@ -116,6 +116,15 @@ public class KeyFileCache extends Cache {
         return key;
     }
 
+    @DataBoundSetter
+    public void setRestoreKey(String restoreKey) {
+        this.restoreKey = restoreKey;
+    }
+
+    public String getRestoreKey() {
+        return restoreKey;
+    }
+
     public void setPath(String path) {
         this.path = path;
     }
