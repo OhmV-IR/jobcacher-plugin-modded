@@ -32,7 +32,9 @@ pipeline {
 
                     stage("Upload artifact") {
                         steps {
-                            archiveArtifacts artifacts: "target/jobcacher.hpi", fingerprint: true
+			    sh "mkdir -p output"
+			    sh "cp target/jobcacher.hpi output/jobcacher-jvm-${JDK_VERSION}.hpi"
+                            archiveArtifacts artifacts: "output/jobcacher-jvm-${JDK_VERSION}.hpi", fingerprint: true
                         }
                     }
                 }
