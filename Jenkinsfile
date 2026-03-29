@@ -12,7 +12,10 @@ pipeline {
                 }
 
                 agent { label 'linux' }
-                tools { jdk "${JDK_VERSION}" }
+                tools { 
+			jdk "${JDK_VERSION}"
+			maven '3.9.14'
+		}
 
                 stages {
                     stage("Checkout") {
