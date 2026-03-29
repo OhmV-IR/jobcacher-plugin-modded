@@ -6,13 +6,13 @@ pipeline {
             matrix {
                 axes {
                     axis {
-                        name 'JDK'
+                        name 'JDK_VERSION'
                         values '21', '25'
                     }
                 }
 
                 agent { label 'linux' }
-                tools { jdk "${JDK}" }
+                tools { jdk "${JDK_VERSION}" }
 
                 stages {
                     stage("Checkout") {
